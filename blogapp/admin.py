@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # models
-from .models import Article
+from blogapp.models import Article
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'created_at', 'updated_at')
