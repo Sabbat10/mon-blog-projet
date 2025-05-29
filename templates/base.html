@@ -32,15 +32,15 @@
       h1,
       h2,
       h3 {
-        color: #333;
+        color: #555;
       }
     </style>
   </head>
   <body>
     <nav>
       <a href="{% url 'blogapp:home' %}">Accueil</a>
-      <a href="#">Connexion</a>
-      <a href="#">Inscription</a>
+      <a href="{% url 'blogapp:connexion' %}">Connexion</a>
+      <a href="{% url 'blogapp:inscription' %}">Inscription</a>
     </nav>
     <div class="container">{% block content %} {% endblock %}</div>
   </body>
