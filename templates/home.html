@@ -2,4 +2,15 @@
 <!--  -->
 {%block content %}
 <h2>Page d'accueil</h2>
-{% endblock content %}
+
+<h3>Bienvenue sur notre blog</h3>
+<p>C'est la page d'accueil, bientôt vous pourrez y écrire des articles</p>
+
+{% if user.is_authenticated %}
+<p>
+  Bonjour vous êtes connecté étant que
+  <a href="#">{{ user.username.upper }}</a>.
+</p>
+{% else %}
+<p>Veillez vous connecter</p>
+{% endif %} {% endblock content %}
