@@ -2,4 +2,11 @@
 <!--  -->
 {%block content %}
 <h2>Page de connexion</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <!--  -->
+  {{ form.as_p }}
+  <button type="submit">Connexion</button>
+</form>
 {% endblock content %}
