@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 
+from blogapp.forms import ArticleForms
+from blogapp.models import Article
+
 
 # views.py
 
@@ -37,5 +40,26 @@ def inscription_view(request):
 
 # logout view
 def deconnexion_view(request):
+    
     logout(request)
     return redirect('blogapp:home')
+
+
+def create_article_view(request):
+    if request.method == 'POST':
+        form = ArticleForms(request.POST)
+        if form.is_valid():
+            new_article = form.save(commit=False)
+            new_article.author = request.user
+            new_article.save()
+            return redirect('blogapp:home')
+        
+    else:
+        form = ArticleForms()
+        
+    return render(
+        request, 
+        'create_update_article.html', 
+        {'form': form, 
+        'action': 'Creer'
+    })
