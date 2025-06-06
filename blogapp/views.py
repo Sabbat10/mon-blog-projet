@@ -9,7 +9,6 @@ from django.contrib.auth import login, logout
 def home_view(request):
     return render(request, 'home.html')
 
-
 def connexion_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
