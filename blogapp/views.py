@@ -10,7 +10,11 @@ from blogapp.models import Article
 
 # home view
 def home_view(request):
-    return render(request, 'home.html')
+    articles = Article.objects.all().order_by('-created_at')
+    context = {
+        'articles': articles,
+    }
+    return render(request, 'home.html', context)
 
 def connexion_view(request):
     if request.method == 'POST':

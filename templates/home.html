@@ -5,14 +5,42 @@
 <hr />
 
 <h3>Bienvenue sur notre blog</h3>
-<p>C'est la page d'accueil, bientôt vous pourrez y écrire des articles</p>
 
 {% if user.is_authenticated %}
 <p>
   Bonjour vous êtes connecté étant que
-  <a href="#">{{ user.username.upper }}</a>.
+  <a href="#">{{ user.username.upper }}</a> -
+  <a href="{% url 'blogapp:create_article' %}">Ajouter un article</a>
 </p>
-<p><a href="{% url 'blogapp:create_article' %}">Ajouter un article</a></p>
 {% else %}
 <p>Veillez vous connecter</p>
-{% endif %} {% endblock content %}
+{% endif %}
+<hr />
+
+<h3>Nos derniers articles</h3>
+
+{% if articles %}
+<!--  -->
+
+<ul>
+  {% for article_item in articles %}
+  <li>
+    <h4><a href="#">{{ article_item.title }}</a></h4>
+    <p>
+      Par: <b>{{ article_item.author.username.capitalize }}</b> -
+      <!--  -->
+      Publié le {{ article_item.created_at }}
+    </p>
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+<p>
+  Aucun article n'est disponible pour le moment. Soyez le premier à en écrire un
+  !
+</p>
+{% endif %}
+
+<!--  -->
+{% endblock content %}
