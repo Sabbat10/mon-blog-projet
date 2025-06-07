@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
@@ -69,3 +69,10 @@ def create_article_view(request):
         {'form': form, 
         'action': 'Creer'
     })
+    
+def detail_article_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    context = {
+        'article': article,
+    }
+    return render(request, 'detail_article.html', context)

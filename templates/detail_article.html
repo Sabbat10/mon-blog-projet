@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block title %} {{article.title}}
+<!--  -->
+{% endblock title%}
+<!--  -->
+{%block content %}
+
+<h1>{{article.title}}</h1>
+<hr />
+<small>
+  Par: <b>{{article.author.username.capitalize}}</b> - Le {{article.created_at}}
+  <!-- verifier si l'article a ete mis a jour -->
+  {% if article.created_at != article.updated_at %} - Mis à jour le
+  {{article.updated_at}}
+  <!--  -->
+  {% endif %}
+</small>
+<hr />
+<br />
+
+<div>{{ article.content|linebreaks }}</div>
+
+<!--  -->
+{% endblock content %}

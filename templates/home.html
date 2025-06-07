@@ -25,7 +25,11 @@
 <ul>
   {% for article_item in articles %}
   <li>
-    <h4><a href="#">{{ article_item.title }}</a></h4>
+    <h4>
+      <a href="{% url 'blogapp:detail_article' pk=article_item.pk %}"
+        >{{ article_item.title }}</a
+      >
+    </h4>
     <p>
       Par: <b>{{ article_item.author.username.capitalize }}</b> -
       <!--  -->
