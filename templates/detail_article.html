@@ -19,5 +19,23 @@
 
 <div>{{ article.content|linebreaks }}</div>
 
+<br />
+<br />
+{% if user.is_authenticated and user == article.author %}
+
+<hr />
+<a
+  href="{% url 'blogapp:update_article' pk=article.pk%}"
+  class="btn btn-primary"
+>
+  Modifier cet Article
+  <!--  -->
+</a>
+-
+
+<a href="#">Supprimer cet Article</a>
+<!--  -->
+<hr />
+{% endif%}
 <!--  -->
 {% endblock content %}

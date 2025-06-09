@@ -76,3 +76,33 @@ def detail_article_view(request, pk):
         'article': article,
     }
     return render(request, 'detail_article.html', context)
+
+
+@login_required
+def update_article_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    
+    if article.author != request.user:
+        return redirect('blogapp:home', pk=article.pk)
+    
+    
+    if request.method == 'POST':
+        form = ArticleForms(request.POST, instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('blogapp:detail_article', pk=article.pk)
+        
+    else:
+        form = ArticleForms(instance=article)
+        
+    context = {
+        'form': form,
+        'action' : 'Modifier',
+        'article': article,
+    }
+        
+    return render(
+        request, 
+        'create_update_article.html', 
+        context
+    )
