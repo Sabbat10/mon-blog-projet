@@ -106,3 +106,21 @@ def update_article_view(request, pk):
         'create_update_article.html', 
         context
     )
+    
+    
+@login_required
+def delete_article_view(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    
+    if article.author != request.user:
+        return redirect('blogapp:detail_article', pk=article.pk)
+    
+    if request.method == 'POST':
+        article.delete()
+        return redirect('blogapp:home')
+    
+    context = {
+        'article': article,
+    }
+    
+    return render(request, 'delete_article.html', context)

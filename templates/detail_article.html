@@ -33,7 +33,9 @@
 </a>
 -
 
-<a href="#">Supprimer cet Article</a>
+<a href="{% url 'blogapp:delete_article' pk=article.pk%}" class="btn btn-danger"
+  >Supprimer cet Article</a
+>
 <!--  -->
 <hr />
 {% endif%}
